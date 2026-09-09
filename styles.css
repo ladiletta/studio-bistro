@@ -1,0 +1,136 @@
+/* Your own rules. This file loads AFTER Tailwind and daisyUI, so anything you
+ * write here wins a tie.
+ *
+ * Keep it short. If you are writing a lot of CSS here, check whether a utility
+ * class already does it — that is what Unit 2 was for. The rules below are the
+ * ones utilities genuinely cannot express.
+ */
+
+/* ============================================================ PALETTE
+ *
+ * "…"
+ *
+ * Name the mood in a sentence that describes a place or a moment — "the last
+ * warm hour in a room with the lights low" — then list your colours and the
+ * job each one does. This block is what you check later decisions against.
+ *
+ *   primary   #______   the action colour: the booking button, links
+ *   base-100  #______   the page ground
+ *   base-200  #______   sections that step forward from the ground
+ *   accent    #______   the one thing allowed to shout
+ */
+
+/* Redeclare the theme's slots to make them yours. Everything that asked for
+ * `primary` follows, and you never touch the markup.
+ *
+ * Change `coffee` to whichever theme you set on <html> — in every page.
+ */
+[data-theme='coffee'] {
+  /* --color-primary: #______; */
+  /* --color-primary-content: #______; */
+  /* --color-accent: #______; */
+}
+
+/* ============================================================ TYPE
+ *
+ * Two faces at most: one for headings, chosen for tone; one for body, chosen
+ * to be readable small. The Google Fonts <link> goes in each page's <head>,
+ * ABOVE this file.
+ */
+/*
+body { font-family: '______', system-ui, sans-serif; }
+h1, h2, .card-title { font-family: '______', Georgia, serif; }
+*/
+
+/* ============================================================ HERO VIDEO
+ *
+ * Four rules, and they are load-bearing. js/hero-video.js explains the order
+ * things load in; this is what makes any of it look like anything.
+ */
+
+/* The stage is the positioning context everything below hangs off. */
+.hero-stage {
+  position: relative;
+  overflow: hidden;
+}
+
+/* THE POSTER IS ALWAYS PAINTED. This gradient is the hero when the video is
+ * blocked, still loading, on a phone, or withheld for reduced motion — which
+ * together is most of the time. Design it as if it were the only thing there.
+ * The script adds the video's thumbnail on top of it as a background-image. */
+.hero-poster {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background-color: var(--color-base-300);
+  background-image: linear-gradient(140deg, var(--color-primary) 0%, var(--color-base-300) 55%, var(--color-neutral) 100%);
+  background-size: cover;
+  background-position: center;
+}
+
+/* COVER, not contain. A 16:9 video in a box that is not 16:9 has to overflow
+ * in one direction; these four lines pick which. The two `min-` values are the
+ * trick — 177.78vh is 16/9 of the viewport height. */
+.hero-poster iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 56.25vw;
+  min-width: 177.78vh;
+  min-height: 100%;
+  border: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+.hero-poster.is-playing iframe {
+  opacity: 1;
+}
+
+/* THE SCRIM is why the headline is readable over moving pictures. Do not
+ * lighten it below this without measuring: white text needs 4.5:1 against the
+ * BRIGHTEST frame of your video, and a video has a lot of frames. At 65% black
+ * over a pure white frame this measures about 6.9:1. */
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to bottom, rgb(0 0 0 / 0.7), rgb(0 0 0 / 0.65) 45%, rgb(0 0 0 / 0.85));
+}
+
+/* ============================================================ EVERYTHING ELSE */
+
+/* FORM LABELS AT FULL STRENGTH. daisyUI paints `.label` at 60% of the
+ * surrounding ink and `.fieldset` sets it 12px, which together measured 3.40:1
+ * on the booking form — under the 4.5:1 floor, and on the one piece of text
+ * that says what a field is for. Dimming a caption is a style choice; dimming
+ * the only name a field has is not. Keep this rule. */
+.fieldset > .label {
+  color: inherit;
+  font-size: 0.875rem;
+}
+
+/* Anchors land below the sticky navbar instead of behind it. If you change the
+ * navbar's height, change this number too. */
+:target {
+  scroll-margin-top: 5rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Some readers' systems ask for less movement — a vestibular condition, or
+ * just a preference. Honour it: no smooth scroll, no fading video in. Keep
+ * this block. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-poster iframe {
+    transition: none;
+  }
+}

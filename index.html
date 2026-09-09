@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en" data-theme="coffee">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bistro — change this to your restaurant</title>
+    <meta name="description" content="One sentence about this restaurant. Search results show it; write it." />
+
+    <!--
+      THE THREE TAGS. Tailwind and daisyUI, no build step, nothing installed.
+      Open this file with Live Server and start working.
+
+      Two honest notes:
+        1. The last tag is Tailwind's BROWSER build. Tailwind's own docs say it
+           is "designed for development purposes only, and is not intended for
+           production." That is fine while you are building. Unit 8 replaces it
+           with a real built stylesheet, because publishing to a public address
+           is where "development only" stops being acceptable.
+        2. These load from jsdelivr, which means jsdelivr sees a request from
+           every reader of your site. That is your call to make on your own
+           project. Read Unit 8's "what a page costs its reader" first.
+    -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Your own rules go last, so they win. See styles.css. -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body class="bg-base-100 text-base-content">
+    <!--
+      THEME. data-theme is on <html>, at the top of this file — and on every
+      other page in this folder. Change it in ALL of them or the site restyles
+      itself between clicks, which reads as broken.
+
+      This one ships as `coffee`. Try `sunset`, `night`, `autumn`, `luxury`,
+      `dracula`, `caramellatte`, `retro`. Do it before you write a word: it is
+      five seconds and it decides the mood everything else is judged against.
+    -->
+
+    <!-- ============================================================== NAV -->
+    <nav class="navbar bg-base-100/80 backdrop-blur sticky top-0 z-30 px-4 md:px-8">
+      <div class="navbar-start">
+        <a class="text-xl font-black tracking-tight" href="index.html">
+          Bistro<span class="text-primary">.</span>
+        </a>
+      </div>
+      <div class="navbar-end gap-1 md:gap-3">
+        <a class="link link-hover hidden sm:inline" href="menu.html">Menu</a>
+        <a class="link link-hover hidden sm:inline" href="visit.html">Visit</a>
+        <a class="btn btn-primary btn-sm md:btn-md" href="visit.html#book">Book a table</a>
+      </div>
+    </nav>
+
+    <!--
+      ============================================================== HERO
+      A YOUTUBE BACKGROUND, and the parts are worth understanding before you
+      change them:
+
+        - The gradient behind everything is in styles.css (.hero-poster). It is
+          always there. If YouTube is blocked on this network — plenty of
+          schools block it — the page still looks deliberate.
+        - js/hero-video.js checks whether YouTube is reachable BEFORE putting
+          an iframe on the page, drops in the video's own thumbnail as a poster,
+          then the video itself. It skips the video on phones and for readers
+          whose system asks for reduced motion.
+        - data-video is the id out of a YouTube URL. In
+          youtube.com/watch?v=WhWc3b3KhnY the id is WhWc3b3KhnY. Swap it for
+          your own footage, then fix the credit in the footer.
+        - The scrim (.hero-scrim) is what keeps the headline readable over
+          moving pictures. Text on video without one is a coin flip every frame.
+    -->
+    <header class="hero-stage relative min-h-[70vh] md:min-h-[85vh] grid">
+      <div class="hero-poster" data-video="WhWc3b3KhnY" data-hero-video></div>
+      <div class="hero-scrim"></div>
+
+      <div class="relative z-10 self-center px-6 py-20 md:py-28 w-full">
+        <div class="max-w-3xl mx-auto text-center">
+          <p class="badge badge-primary badge-lg mb-6">Open Wednesday to Sunday</p>
+          <h1 class="text-4xl md:text-7xl font-black leading-[1.05] mb-6 text-white drop-shadow">
+            A headline that tastes like the food
+          </h1>
+          <p class="text-lg md:text-xl text-white/90 mb-8 max-w-xl mx-auto">
+            One sentence. What kind of cooking, and who it is for. Not "an
+            unforgettable culinary journey" — say what is actually on the plate.
+          </p>
+          <a class="btn btn-primary btn-lg" href="visit.html#book">Book a table</a>
+          <p class="mt-4">
+            <a class="link text-white/80" href="menu.html">or read the menu first</a>
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <!--
+      ============================================================== FACTS
+      Three things a hungry person came here to find. Put them above
+      everything else you are proud of.
+    -->
+    <section class="bg-base-200 border-b border-base-300">
+      <div class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-base-300">
+        <div class="px-6 py-8 text-center">
+          <h2 class="font-bold uppercase tracking-widest text-xs opacity-60 mb-2">Hours</h2>
+          <p class="text-lg">Wed–Sun, 5–10pm</p>
+        </div>
+        <div class="px-6 py-8 text-center">
+          <h2 class="font-bold uppercase tracking-widest text-xs opacity-60 mb-2">Find us</h2>
+          <p class="text-lg">123 Your Street, Your City</p>
+        </div>
+        <div class="px-6 py-8 text-center">
+          <h2 class="font-bold uppercase tracking-widest text-xs opacity-60 mb-2">Call</h2>
+          <!-- tel: makes this tap-to-call on a phone. Use it. -->
+          <p class="text-lg"><a class="link link-hover" href="tel:+12165550100">(216) 555-0100</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!--
+      ============================================================== DISHES
+      Three, and keep them parallel: same shape, same length of description,
+      and if one has a photo they all do. A grid of unequal cards reads as
+      unfinished no matter how good the photography is.
+    -->
+    <section id="dishes" class="px-6 py-20 md:py-28 max-w-6xl mx-auto">
+      <div class="max-w-2xl mb-12">
+        <p class="text-primary font-bold uppercase tracking-widest text-xs mb-3">This week</p>
+        <h2 class="text-3xl md:text-5xl font-black mb-4">What we are cooking</h2>
+        <p class="text-lg opacity-70">
+          Two sentences of context. What changed on the menu, and why.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <article class="card bg-base-200 shadow-lg overflow-hidden">
+          <!--
+            IMAGE SLOT. Replace this coloured block with a real <img>. Its alt
+            says what the image is FOR, not what is in it. Then record the
+            photographer, the source and the licence in the footer — if you
+            cannot write that line, you are not allowed to use the picture.
+          -->
+          <div class="aspect-[4/3] bg-gradient-to-br from-primary/30 to-base-300"></div>
+          <div class="card-body">
+            <h3 class="card-title">First dish</h3>
+            <p class="opacity-70">Two lines. What it is, and the one thing in it worth naming.</p>
+            <p class="font-bold text-primary text-lg">$00</p>
+          </div>
+        </article>
+
+        <article class="card bg-base-200 shadow-lg overflow-hidden">
+          <div class="aspect-[4/3] bg-gradient-to-br from-secondary/30 to-base-300"></div>
+          <div class="card-body">
+            <h3 class="card-title">Second dish</h3>
+            <p class="opacity-70">Two lines. What it is, and the one thing in it worth naming.</p>
+            <p class="font-bold text-primary text-lg">$00</p>
+          </div>
+        </article>
+
+        <article class="card bg-base-200 shadow-lg overflow-hidden">
+          <div class="aspect-[4/3] bg-gradient-to-br from-accent/30 to-base-300"></div>
+          <div class="card-body">
+            <h3 class="card-title">Third dish</h3>
+            <p class="opacity-70">Two lines. What it is, and the one thing in it worth naming.</p>
+            <p class="font-bold text-primary text-lg">$00</p>
+          </div>
+        </article>
+      </div>
+
+      <p class="mt-10">
+        <a class="btn btn-outline" href="menu.html">The whole menu</a>
+      </p>
+    </section>
+
+    <!--
+      ============================================================== STORY
+      Text one side, picture the other. On a phone it stacks with the text
+      first — a picture you have not been told the point of is just a picture.
+    -->
+    <section class="bg-base-200">
+      <div class="max-w-6xl mx-auto px-6 py-20 md:py-28 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div>
+          <p class="text-primary font-bold uppercase tracking-widest text-xs mb-3">Since 20XX</p>
+          <h2 class="text-3xl md:text-4xl font-black mb-6">The part only you can write</h2>
+          <p class="opacity-70 mb-4">
+            A paragraph about the people, not the ambience. Who cooks here, what
+            they cooked before, what they are stubborn about.
+          </p>
+          <p class="opacity-70">
+            A second paragraph, shorter. End on something specific: a supplier, a
+            grandmother, a piece of equipment nobody else has.
+          </p>
+        </div>
+        <div class="aspect-square rounded-2xl bg-gradient-to-tr from-base-300 to-primary/25 shadow-xl"></div>
+      </div>
+    </section>
+
+    <!--
+      ============================================================== QUOTE
+      One review, attributed. Three anonymous raves are worth less than one
+      sentence with a name on it.
+    -->
+    <section class="px-6 py-20 md:py-28">
+      <blockquote class="max-w-3xl mx-auto text-center">
+        <p class="text-2xl md:text-4xl font-serif italic leading-snug mb-6">
+          “One real sentence somebody actually said about this place.”
+        </p>
+        <footer class="opacity-60">— Their name, where it was published</footer>
+      </blockquote>
+    </section>
+
+    <!--
+      ============================================================== THE ASK
+      Same ask as the hero, not a new one. A page with two different requests
+      has not decided what it wants.
+    -->
+    <section class="bg-primary text-primary-content px-6 py-20 md:py-24">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl md:text-5xl font-black mb-6">Come and eat</h2>
+        <p class="opacity-90 mb-8 text-lg">
+          One sentence. Reservations, walk-ins, or both — say which.
+        </p>
+        <a class="btn btn-lg" href="visit.html#book">Book a table</a>
+      </div>
+    </section>
+
+    <!-- ============================================================ FOOTER -->
+    <footer class="footer sm:footer-horizontal bg-base-300 text-base-content px-6 md:px-10 py-12">
+      <nav>
+        <h2 class="footer-title">Pages</h2>
+        <a class="link link-hover" href="index.html">Home</a>
+        <a class="link link-hover" href="menu.html">Menu</a>
+        <a class="link link-hover" href="visit.html">Visit</a>
+      </nav>
+      <nav>
+        <h2 class="footer-title">Find us</h2>
+        <a class="link link-hover" href="tel:+12165550100">(216) 555-0100</a>
+        <a class="link link-hover" href="mailto:hello@example.com">hello@example.com</a>
+        <span class="opacity-70">123 Your Street, Your City</span>
+      </nav>
+      <aside>
+        <h2 class="footer-title">Credits</h2>
+        <!--
+          EVERY borrowed thing goes here: creator, source, licence. The hero
+          video shipped with this starter is credited below — when you swap the
+          id, swap this line for your own footage's credit.
+        -->
+        <p class="opacity-70 max-w-xs text-sm">
+          Hero video: <em>Spring</em> by Blender Studio, CC BY 4.0. Replace it
+          with your own and replace this line with its credit.
+        </p>
+        <p class="opacity-70 text-sm">© 20XX Your restaurant.</p>
+      </aside>
+    </footer>
+
+    <script src="js/hero-video.js"></script>
+  </body>
+</html>

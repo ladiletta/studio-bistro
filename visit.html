@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en" data-theme="coffee">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Visit — Bistro</title>
+    <meta name="description" content="Hours, address and how to book. One sentence, written for a search result." />
+
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body class="bg-base-100 text-base-content">
+    <nav class="navbar bg-base-100/80 backdrop-blur sticky top-0 z-30 px-4 md:px-8">
+      <div class="navbar-start">
+        <a class="text-xl font-black tracking-tight" href="index.html">
+          Bistro<span class="text-primary">.</span>
+        </a>
+      </div>
+      <div class="navbar-end gap-1 md:gap-3">
+        <a class="link link-hover hidden sm:inline" href="menu.html">Menu</a>
+        <a class="link link-hover hidden sm:inline" href="visit.html" aria-current="page">Visit</a>
+        <a class="btn btn-primary btn-sm md:btn-md" href="#book">Book a table</a>
+      </div>
+    </nav>
+
+    <header class="bg-base-200 px-6 py-16 md:py-24 border-b border-base-300">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-6xl font-black mb-4">Visit</h1>
+        <p class="text-lg opacity-70 max-w-xl">
+          Where we are, when we are open, and how to get a table.
+        </p>
+      </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6 py-16 md:py-24">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <section>
+          <h2 class="text-2xl font-black mb-6">Hours</h2>
+          <!-- A table, because this IS tabular data: two columns, related rows. -->
+          <table class="table">
+            <caption class="sr-only">Opening hours by day</caption>
+            <tbody>
+              <tr>
+                <th class="font-normal opacity-70">Monday &amp; Tuesday</th>
+                <td class="text-right">Closed</td>
+              </tr>
+              <tr>
+                <th class="font-normal opacity-70">Wednesday–Friday</th>
+                <td class="text-right">5–10pm</td>
+              </tr>
+              <tr>
+                <th class="font-normal opacity-70">Saturday</th>
+                <td class="text-right">4–11pm</td>
+              </tr>
+              <tr>
+                <th class="font-normal opacity-70">Sunday</th>
+                <td class="text-right">4–9pm</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2 class="text-2xl font-black mt-12 mb-4">Getting here</h2>
+          <address class="not-italic opacity-70 leading-relaxed">
+            123 Your Street<br />
+            Your City, ST 00000<br />
+            <a class="link" href="tel:+12165550100">(216) 555-0100</a>
+          </address>
+          <p class="opacity-70 mt-4">
+            One line about parking, or the bus, or the door being around the
+            side. The sentence that stops somebody circling the block.
+          </p>
+        </section>
+
+        <!--
+          ============================================================ THE FORM
+          A form is where accessibility is won or lost, so this one is built
+          properly and you should keep the shape:
+
+            - every input has a <label for> pointing at its id. Placeholder
+              text is not a label; it disappears exactly when it is needed.
+            - `required` and `type` let the browser check before the server does.
+            - the fieldset groups the fields that belong together.
+
+          IT DOES NOT SEND ANYWHERE YET, on purpose. `action` needs a service to
+          point at — Formspree, Netlify Forms, a Google Form — and choosing one
+          is a decision your team makes, not one a starter makes for you.
+        -->
+        <section id="book" class="card bg-base-200 shadow-lg">
+          <form class="card-body gap-4" novalidate>
+            <h2 class="card-title text-2xl">Book a table</h2>
+            <p class="opacity-70 -mt-2">
+              Parties of seven or more, call us instead.
+            </p>
+
+            <fieldset class="fieldset">
+              <label class="label" for="name">Your name</label>
+              <input class="input w-full" type="text" id="name" name="name" required autocomplete="name" />
+
+              <label class="label" for="email">Email</label>
+              <input class="input w-full" type="email" id="email" name="email" required autocomplete="email" />
+
+              <label class="label" for="when">When</label>
+              <input class="input w-full" type="datetime-local" id="when" name="when" required />
+
+              <label class="label" for="party">How many</label>
+              <select class="select w-full" id="party" name="party">
+                <option>1</option>
+                <option selected>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+              </select>
+
+              <label class="label" for="notes">Anything we should know</label>
+              <textarea class="textarea w-full" id="notes" name="notes" rows="3" placeholder="Allergies, a birthday, a wheelchair"></textarea>
+            </fieldset>
+
+            <button class="btn btn-primary btn-block" type="submit">Request a table</button>
+            <p class="text-sm opacity-60">
+              This form has nowhere to go yet — see the comment above it.
+            </p>
+          </form>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer sm:footer-horizontal bg-base-300 text-base-content px-6 md:px-10 py-12">
+      <nav>
+        <h2 class="footer-title">Pages</h2>
+        <a class="link link-hover" href="index.html">Home</a>
+        <a class="link link-hover" href="menu.html">Menu</a>
+        <a class="link link-hover" href="visit.html">Visit</a>
+      </nav>
+      <nav>
+        <h2 class="footer-title">Find us</h2>
+        <a class="link link-hover" href="tel:+12165550100">(216) 555-0100</a>
+        <a class="link link-hover" href="mailto:hello@example.com">hello@example.com</a>
+        <span class="opacity-70">123 Your Street, Your City</span>
+      </nav>
+      <aside>
+        <h2 class="footer-title">Credits</h2>
+        <p class="opacity-70 max-w-xs text-sm">
+          Every image, its creator, source and licence. This page has none yet.
+        </p>
+        <p class="opacity-70 text-sm">© 20XX Your restaurant.</p>
+      </aside>
+    </footer>
+  </body>
+</html>
