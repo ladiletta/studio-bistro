@@ -4,6 +4,9 @@ A three-page restaurant site with a **YouTube background hero**. Not a finished
 template you recolour — a professional structure you make yours, and can defend
 every choice in.
 
+**See it running: <https://ladiletta.github.io/studio-bistro/>** — that page is
+built from this branch, so it is exactly what you get when you copy it.
+
 That difference is the point. A team handed a finished site rearranges it. A
 team handed a real structure builds one.
 
